@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import UserQuoteProfile
 
 # Create your views here.
 def main(request):
@@ -15,6 +16,9 @@ def main(request):
 	c['title']= 'Motivated life'
 	return render(request, 'daily/home.html', c)
 
+
 @login_required(login_url='/account/login')
 def dashboard(request):
-	return render(request, 'daily/dashboard.html', {'title':'Dashboard'})
+	#get the progress of a user
+	profile= UserQuoteProfile.objects.filter(user= request.user).get()
+	return render(request, 'daily/dashboard.html', {'title':'Dashboard', 'progress': profile.progress})
