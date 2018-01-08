@@ -8,7 +8,7 @@ from .models import QuoteProfile
 
 # Create your views here.
 def main(request):
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		return redirect('/dashboard/')
 
 	c= {}

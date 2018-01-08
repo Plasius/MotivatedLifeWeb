@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 class QuoteProfile(models.Model):
-    user= models.OneToOneField(User)
+    user= models.OneToOneField(User, on_delete=models.DO_NOTHING)
     progress= models.IntegerField(default=0)
 
 def create_profile(sender, **kwargs):
