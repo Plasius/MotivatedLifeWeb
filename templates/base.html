@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .dark-primary-color    { background: #0288D1; }
+    .default-primary-color { background: #03A9F4; }
+    .light-primary-color   { background: #B3E5FC; }
+    .accent-color          { background: #CDDC39; }
+    .text-primary-color    { color: #FFFFFF; }
+    .primary-text-color    { color: #212121; }
+    .secondary-text-color  { color: #757575; }
+    .divider-color         { border-color: #BDBDBD; }
+
+
+  </style>
+  <title>{{ title }}</title>
+  {% include 'bootstrap_css.html' %}
+  {% block head %}
+  {% endblock %}
+</head>
+<body background="#0288D1">
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+	{% block javascript %}
+  {% include 'bootstrap_javascript.html' %}
+	{% endblock %}
+</body>
+</html>

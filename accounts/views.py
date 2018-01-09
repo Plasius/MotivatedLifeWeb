@@ -4,31 +4,42 @@ from django.contrib.auth import authenticate, login, logout
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
 
 # Create your views here.
 
 # /register
-def register_view(request):
+def register_view(request, passError=False, existsError=False):
 	c= {}
 	c.update(csrf(request))
 	c['title']= 'Register'
+
+	if existsError:
+		c['existsError'] = True
+	elif passError:
+		c['passError'] = True
+
 	return render(request, 'accounts/register.html', c)
 
 # /login
-def login_view(request):
+def login_view(request, error = False):
 	c= {}
 	c.update(csrf(request))
 	c['title']= 'Login'
+
+	if error:
+		c['error'] = True
+
 	return render(request, 'accounts/login.html', c)
 
 # /auth -form
-def auth_view(request, onsuccess='/dashboard/', onfail='/fail'):
+def auth_view(request, onsuccess='/dashboard/'):
     user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
     if user is not None:
         login(request, user)
         return redirect(onsuccess)
     else:
-        return redirect(onfail)
+        return login_view(request, True)
 
 def create_user(username, email, password):
     user = User(username=username, email=email)
@@ -51,11 +62,15 @@ def user_name_exists(name):
 # /signup -form
 def signup_view(request):
 	post = request.POST
-	if not user_email_exists(post['email']) and not user_name_exists(post['username']):
-		user = create_user(username=post['username'], email=post['email'], password=post['password'])
-		return auth_view(request)
-	else:
-		return redirect("/account/login/")
+	try:
+		if validate_password(post['password']) == None:
+			if not user_email_exists(post['email']) and not user_name_exists(post['username']):
+				create_user(username=post['username'], email=post['email'], password=post['password'])
+				return auth_view(request)
+			else:
+				return register_view(request, existsError = True)
+	except Exception as e:
+		return register_view(request, passError = True)
 
 # /logout
 def logout_view(request):

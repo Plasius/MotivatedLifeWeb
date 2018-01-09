@@ -1,12 +1,33 @@
-{% extends 'accounts/base.html' %}
-{% block title %}{{title}}{% endblock %}
+{% extends 'base.html' %}
+
+{% block head %}
+<style type="text/css">
+		body{
+			background-color: #0288D1;
+		}
+		.container{
+		    position: absolute;
+		    top:25%;
+		    bottom: 0;
+		    left: 0;
+		    right: 0;
+			text-align:center;
+		}
+</style>
+
+{% endblock %}
 
 {% block content %}
+<div class="container">
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
 				<form class="form-signin" action="/account/auth/" method="POST" _lpchecked="1"> {% csrf_token %}
 					<h2 class="form-signin-heading" style="color:white;">Log in</h2>
+					{% if error %}
+						<a style="color:#CDDC39">Invalid credentials</a>
+					{% endif %}
+
 					<div data-role="fieldcontain">
 						<input type="username" name="username" id="username" class="form-control" placeholder="Username" required="" autofocus="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
 
@@ -16,10 +37,11 @@
 						<input type="password" name="password" id="password" class="form-control" placeholder="Password" required="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
 					</div>
 					<div style="text-align:right !important;"><a style="color:white;" href="/account/password_reset" >Forgot password?</a></div>
-					<button style="background-color:darkorange;color:white;" class="btn btn-lg btn-block" type="submit" name="submit" value="submit-value">Log in</button>
+					<button style="background-color:#CDDC39;color:black;" class="btn btn-lg btn-block" type="submit" name="submit" value="submit-value">Log in</button>
 				</form>
-				<p style="color:white">If you don't have an account, you can <br> <a style="color:white" href=/account/register/>register here</a></p>
+				<p style="color:white">If you don't have an account, you can <br> <a style="color:white;" href=/account/register/><u>register here</a></p>
 			</div>
 			<div class="col-md-4"></div>
 		</div>
+	</div>
 {% endblock %}

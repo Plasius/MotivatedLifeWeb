@@ -16,3 +16,4 @@ post_save.connect(create_profile, sender=User)
 
 class Quote(models.Model):
     name = models.CharField(max_length=300, default='', unique=True)
+    day = models.IntegerField(default = 0, unique=True)

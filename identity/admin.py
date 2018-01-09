@@ -3,6 +3,7 @@ from identity.models import IdentityProfile
 
 class PostIdentityProfileAdmin(admin.ModelAdmin):
     list_display= ['user']
+    search_fields= ['user']
     class Meta:
         model= IdentityProfile
 
