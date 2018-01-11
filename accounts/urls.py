@@ -18,7 +18,6 @@ urlpatterns = [
 	url(r'^logout/$', views.logout_view, name='logout'),
 
 	#new
-
     url(r'^password_reset/$',
         PasswordResetView.as_view(template_name='accounts/password_reset_form.html'),
         name='password_reset'),
@@ -26,7 +25,7 @@ urlpatterns = [
         PasswordResetDoneView.as_view(template_name='accounts/password_reset_done.html'),
         name='password_reset_done'),
 
-    #deals with toke
+    #deals with token
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         PasswordResetConfirmView.as_view(template_name='accounts/password_reset_confirm.html'),
         name='password_reset_confirm'),
