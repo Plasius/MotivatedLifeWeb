@@ -8,7 +8,7 @@ class QuoteAdmin(admin.ModelAdmin):
         model= Quote
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display= ['user']
+    list_display= ['user', 'updated']
     search_fields= ['user']
     class Meta:
         model = QuoteProfile
