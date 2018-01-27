@@ -1,23 +1,44 @@
 {% extends 'base.html' %}
+{% block head %}
+<style>
+  body{
+    background-color: #0288D1;
+  }
+  h3{
+    color: #CDDC39;
+  }
+  p, div{
+    color:white;
+  }
 
+</style>
+
+{% endblock %}
 {% block content %}
+<br>
 <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3 ">
-        {% if staff %}
-          {% if obj.draft %}
-            <p style="color:red;">Draft</p>
-          {% endif %}
-        {% endif %}
-        <h3> {{ obj.title }} ({{ obj.published }})</h3>
-        {% if obj.image %}
-        <div class="thumbnail">
-          <img src='{{obj.image.url}}' class='img-responsive'/>
-        </div>
-        {% endif %}
-        <hr>
-        <p> {{ obj.content|safe }} </p>
-      </div>
+  <div>
+    <div>
+      {% if staff %}
+      {% if obj.draft %}
+      <p style="color:red;">Draft</p>
+      {% endif %}
+      {% endif %}
+      <h3> {{ obj.title }} ({{ obj.published }})</h3>
     </div>
+
+  </div>
+  <br>
+  <div>
+    {% if obj.image %}
+    <div>
+      <img src='{{obj.image.url}}' class='img-fluid'/>
+    </div>
+    {% endif %}
+  </div>
+  <br>
+  <div>
+    {{ obj.content|safe }}
+  </div>
 </div>
 {% endblock %}

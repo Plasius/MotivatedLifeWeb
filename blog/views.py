@@ -46,13 +46,14 @@ def post_list(request):
         Q(content__icontains=query)
         ).distinct()
 
-    paginator = Paginator(queryset, 2)
+    paginator = Paginator(queryset, 10)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
 
     context = {
         'object_list' : posts,
-        'staff' : request.user.is_staff
+        'staff' : request.user.is_staff,
+        'paratlan' : range(1,10,2)
     }
     return render(request, 'blog/post_list.html', context)
 

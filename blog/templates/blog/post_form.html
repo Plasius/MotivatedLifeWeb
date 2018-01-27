@@ -1,12 +1,28 @@
-<html>
-  <head>
-  </head>
-  <body>
-    <form method='POST' action='' enctype="multipart/form-data"> {% csrf_token %}
-      {{form.as_p}}
-      <input type='submit' value='Create Post'/>
-    </form>
+{% extends 'base.html' %}
 
-  </body>
+{% block head %}
+<style>
+  body{
+    background-color: #0288D1;
+  }
+  h3{
+    color: #CDDC39;
+  }
+  p, div{
+    color:white;
+  }
+  textarea{
+    resize: horizontal;
+  }
+</style>
 
-</html>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <form method='POST' action='' enctype="multipart/form-data"> {% csrf_token %}
+    {{form.as_p}}
+    <input type='submit' value='Create Post'/>
+  </form>
+</div>
+{% endblock %}

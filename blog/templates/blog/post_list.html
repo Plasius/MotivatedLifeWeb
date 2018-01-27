@@ -1,51 +1,91 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<style>
+  body{
+    background-color: #0288D1;
+  }
+h1, h3{
+  color: #CDDC39;
+}
+button{
+  color: black;
+  background-color: #CDDC39;
+}
+   div, p{
+    color: white;
+  }
+</style>
+
+{% endblock %}
 {% block content %}
+
+<div class="container">
+<div>
 <h1> Blog </h1>
 <form method='GET' action =''>
   <input type="text" name='q' placeholder="Search posts"/>
-  <input type="submit" value="Search" />
-
-<div class="container">
-  {% for obj in object_list %}
+  <button class="btn btn-md" type="submit" value="Search">Search</button>
+</div>
+<br>
+  <div>
+    {% for obj in object_list %}
     <div class="row">
+      {% if forloop.counter in paratlan %}
       <div class="col-sm-6 col-sm-offset-3">
+        <a href="/blog/{{ obj.id }}"><h3> {{ obj.title }} ({{ obj.published }})</h3></a>
         {% if staff %}
-          {% if obj.draft %}
-            <p style="color:red;">Draft</p>
-          {% endif %}
+        {% if obj.draft %}
+        <p style="color:red;">Draft</p>
+        {% endif %}
         {% endif %}
 
+        <p> {{ obj.content|safe|truncatechars_html:393 }} </p>
+      </div>
+      {% if obj.image %}
+      <div class="col-sm-6">
+        <img src='{{obj.image.url}}' class='img-fluid'/>
+      </div>
+      {% endif %}
+      {% else %}
+      {% if obj.image %}
+      <div class="col-sm-6">
+        <img src='{{obj.image.url}}' class='img-fluid'/>
+      </div>
+      {% endif %}
+      <div class="col-sm-6 col-sm-offset-3">
         <a href="/blog/{{ obj.id }}"><h3> {{ obj.title }} ({{ obj.published }})</h3></a>
-        {% if obj.image %}
-        <div class="thumbnail">
-          <img src='{{obj.image.url}}' class='img-responsive'/>
-        </div>
+        {% if staff %}
+        {% if obj.draft %}
+        <p style="color:red;">Draft</p>
         {% endif %}
-        <hr>
-        <p> {{ obj.content|safe }} </p>
+        {% endif %}
+        <p> {{ obj.content|safe|truncatechars_html:393 }} </p>
+      </div>
+      {% endif %}
+    </div>
+    <hr>
+    {% endfor %}
+    {{ number }}
+
+    <div class="row">
+      <div class="pagination">
+        <span class="step-links">
+          {% if object_list.has_previous %}
+          <a href="?page={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">previous</a>
+          {% endif %}
+
+          <span class="current">
+            Page {{ object_list.number }} / {{ object_list.paginator.num_pages }}.
+          </span>
+
+          {% if object_list.has_next %}
+          <a href="?page={{ object_list.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">next</a>
+          {% endif %}
+        </span>
       </div>
     </div>
-  {% endfor %}
 
-  <div class="row">
-    <div class="pagination">
-      <span class="step-links">
-        {% if object_list.has_previous %}
-        <a href="?page={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">previous</a>
-        {% endif %}
 
-      <span class="current">
-        Page {{ object_list.number }} / {{ object_list.paginator.num_pages }}.
-      </span>
-
-      {% if object_list.has_next %}
-        <a href="?page={{ object_list.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">next</a>
-        {% endif %}
-      </span>
-    </div>
   </div>
-
-
-</div>
-{% endblock %}
+  {% endblock %}

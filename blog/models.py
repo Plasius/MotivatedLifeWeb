@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 def find_upload(instance, filename):
-    return '%s/%s' %(instance.id, filename)
+    return '-'.join(instance.title.split()) +'/'+ filename
 
 # Create your models here.
 class Post(models.Model):
