@@ -1,0 +1,32 @@
+I have come far.
+Now begins my greatest competition, with myself, to become the most extraordinary person I can be!
+break
+arg1 is what I seek, and through it, arg2 .
+My enemies are many, but my hunger for arg3 is unstoppable.
+My ideal self will arg4 , but in order to get there, I need to fight reality first.
+break
+For me, the most important thing in life is arg5 .
+At times, when I am at a low point in life, I will still keep my passion for arg6 alive.
+I will not back down. I will continue to push forward and become a stronger person!
+break
+I'm grateful for disappointment, for letting me know the things that matter to me the most.
+I have survived 100 percent of my worst days in life, so I just need to keep going.
+No doubts or fears will be able to stop me from reaching my dream of arg7 because I am resilient and strong.
+break
+I'm grateful for my fear of arg8 for letting me know the opportunities for growth.
+I will face the scary situations because I know I can accomplish great things if I push myself out of the comfort zone.
+If I didn't face my fears, I wouldn't be doing the amazing things I am doing today.
+break
+And most importantly I am thankful for arg9 .
+I will not forget how much I am worth and I will not let someone else tell me otherwise.
+break
+My time is limited, I need to accept where I am now, and go all out until I can do what I truly love.
+It's not easy to change but I can do it.
+break
+I am that individual who is willing to let go of negative things such as arg10 in order to achieve his goals.
+I can push pass all of the expectations, including my own.
+I will be strong for those who need me and I will be a superhero for myself.
+The only person responsible for my success is me.
+break
+I can do this!
+end

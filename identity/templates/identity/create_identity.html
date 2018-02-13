@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+  body{
+    background-color: #03A9F4;
+    color:white;
+    font-size: 15px;
+  }
+
+  #container{
+    text-align: center;
+    width:90%;
+    font-size:20px;
+    margin:2% 5%;
+  }
+  .section{
+    margin:50px;
+  }
+}
+</style>
+
+<script>
+$(document).ready(function (){
+  $("input").on("focusout", function(e){
+    $(this).css("background-color", "#5cf442");
+  })
+  var argN=11;
+  var currentArg = 2;
+  $("input[name=arg1]").focus();
+
+  $(document).keydown(function(e){
+    if(e.which == 13 || e.which == 9){
+      if(currentArg==argN){
+        $('.textspace').last().css("background-color", "#5cf442");
+        currentArg++;
+      }else if(currentArg<argN){
+        e.preventDefault();
+        $("input[name="+"arg"+currentArg+"]").focus();
+        currentArg++;
+      }
+    }
+
+
+  });
+
+});
+</script>
+
+{% endblock %}
+
+{% block content %}
+  <div id="container">
+      <form class="form-signin" action="/identity/make_identity" method="POST" _lpchecked="1"> {% csrf_token %}
+        {{formhtml|safe}}
+      </form>
+  </div>
+{% endblock %}

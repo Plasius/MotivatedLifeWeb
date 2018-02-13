@@ -17,6 +17,8 @@
   </style>
   <title>{{ title }}</title>
   {% include 'bootstrap_css.html' %}
+  {% include 'bootstrap_javascript.html' %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   {% block head %}
   {% endblock %}
 </head>
@@ -25,9 +27,5 @@
     {% block content %}
     {% endblock %}
   </main>
-
-	{% block javascript %}
-  {% include 'bootstrap_javascript.html' %}
-	{% endblock %}
 </body>
 </html>
