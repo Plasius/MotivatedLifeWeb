@@ -1,11 +1,146 @@
-{% extends 'base.html' %}
-{% block title%}
-{{ title }}
-{% endblock %}
-{% block content %}
-<p> Current day: {{ progress }}</p>
-<P> Quote: {{quote}} </p>
+{% extends 'base.html'%}
+{% load static %}
+{% block head %}
+<style>
 
-<h2><a href='/account/logout/'>Sign out</a></h2>
+		body{
+			background-color: #0288D1;
+		}
+
+	#title {
+	  color: #FFFFFF;
+	  font-size: 50px;
+	  text-shadow: rgb(3, 3, 3) -1px 4px 9px;
+	}
+
+  #currentDay {
+	  color: #FFFFFF;
+	  font-size: 30px;
+	  text-shadow: rgb(3, 3, 3) -1px 4px 9px;
+	}
+
+	#loginbutton{
+		color: #FFFFFF;
+	  font-size: 25px;
+	  text-shadow: rgb(3, 3, 3) -1px 4px 9px;
+	}
+
+.container{
+    position: absolute;
+    top:25%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	text-align:center;
+}
+
+nav{
+  position: absolute;
+  top:0;
+  right:0;
+}
+nav a{
+  color:white;
+  padding: 20px;
+}
+
+.btn{
+  cursor: pointer;
+}
+</style>
+
+<script>
+function copyToClipboard() {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($("#title").text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+$(document).ready(function(){
+  $("#share").on("click", function(){
+    copyToClipboard();
+    $("#share").notify("Copied to clipboard", "success");
+  });
+
+  $("#favorite").on("click", function(e){
+    e.preventDefault();
+    $.ajax({
+      type:'POST',
+      url:'/favorite/',
+      data:{
+        qid:{{qid}},
+        csrfmiddlewaretoken:getCookie('csrftoken')
+      },
+      success:function(msg){
+        alert(msg);
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert("some error");
+      }
+    });
+  });
+});
+
+</script>
+{% endblock %}
+
+{% block content %}
+    <nav class="nav navbar-right">
+      <a href="/identity">Identity</a>
+      <a href="/blog">Blog</a>
+      <a href="/account/logout">Log out</a>
+    </nav>
+	<div class="container">
+
+
+		<div class="row">
+			<div class="col-lg-2 col-md-1 col-sm-2"> </div>
+			<div class="col-lg-8">
+        <p id="currentDay"> Current day: {{ progress }}</p>
+        <h1 id="title">{{quote}} </h1>
+
+        <!---<h2><a href='/account/logout/'>Sign out</a></h2>--->
+
+			</div>
+		</div>
+		<br><br>
+		<div class="row">
+			<div class="col-lg-2 col-md-0 col-sm-0"> </div>
+			<div class="col-lg-8">
+				<div class="row">
+							<div class="col-lg-4 col-md-5 col-sm-12">
+								<a id="share" class="btn btn-lg accent-color btn-block"  role="button" style="color:#212121">Share</a>
+							</div>
+							<div class="col-lg-4 col-md-2 col-sm-12">
+							</div>
+							<div class="col-lg-4 col-md-5 col-sm-12">
+								<a id="favorite" class="btn btn-lg accent-color btn-block"  role="button"  style="color:#212121;">Favorite</a>
+							</div>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-0 col-sm-0" > </div>
+		</div>
+	</div>
+
 
 {% endblock %}

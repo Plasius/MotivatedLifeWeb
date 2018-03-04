@@ -45,7 +45,7 @@ def create_identity_view(request):
             message += line + '<br>'
     context = {'formhtml' : message}
     context.update(csrf(request))
-    return render(request, 'identity/create_identity.html', context)
+    return render(request, 'identity/identity.html', context)
 
 #/identity/me
 @login_required(login_url='/account/login')
@@ -80,7 +80,7 @@ def my_identity_view(request):
                 message += line + '<br>'
         context = {'formhtml' : message}
         context.update(csrf(request))
-        return render(request, 'identity/create_identity.html', context)
+        return render(request, 'identity/identity.html', context)
 
 
 #/identity/make_identity
